@@ -129,7 +129,7 @@ export default function Home() {
             <div>
               <p className="text-sm">Currently</p>
               <p className="text-sm text-gray-500">
-                Community Department Lead at Superteam Malaysia
+                President of APU Blockchain and Cryptocurrency Club
               </p>
             </div>
             <div>
