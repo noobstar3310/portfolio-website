@@ -5,7 +5,12 @@ import type React from "react";
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { TypeAnimation } from "react-type-animation";
+import dynamic from "next/dynamic";
+
+const TypeAnimation = dynamic(
+  () => import("react-type-animation").then((mod) => mod.TypeAnimation),
+  { ssr: false }
+);
 
 interface ExperienceItemProps {
   title: string;
@@ -55,7 +60,7 @@ export default function Home() {
     };
   }, []);
 
-  const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
+  const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
     }
