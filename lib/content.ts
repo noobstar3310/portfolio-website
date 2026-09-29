@@ -7,6 +7,10 @@ import ovantiImage from "@/public/projects/ovanti.jpg";
 
 export const site = {
   name: "Tan Aik Wei",
+  // Shown in the top bar
+  handle: "eggwae.eth",
+  // Served from public/resume.pdf
+  resume: "/resume.pdf",
 };
 
 // The hero reads: NAME / ROLE / SPECIALIZING IN / (SPECIALTY)

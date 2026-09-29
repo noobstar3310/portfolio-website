@@ -1,8 +1,9 @@
+import { ArrowUpRight } from "lucide-react";
 import { navItems, site } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
-// Top bar: name left, slash-separated links centred, year right, set in the
-// same small uppercase labels as the rest of the site
+// Top bar: handle left, slash-separated links centred, resume link right, set
+// in the same small uppercase labels as the rest of the site
 export function SiteNav({ dark }: { dark: boolean }) {
   return (
     <nav
@@ -11,12 +12,14 @@ export function SiteNav({ dark }: { dark: boolean }) {
         dark ? "bg-black text-white" : "bg-white text-black"
       )}
     >
-      {/* Phones: name above the links; desktop: one row with the links centred */}
-      <div className="grid grid-cols-1 items-start gap-y-1.5 md:grid-cols-[1fr_auto_1fr] md:gap-x-6">
-        <a href="#top" className="hover:underline">
-          {site.name}
+      {/* Phones: handle and resume on the first row, links below;
+          desktop: one row with the links centred */}
+      <div className="grid grid-cols-[1fr_auto] items-start gap-y-1.5 md:grid-cols-[1fr_auto_1fr] md:gap-x-6">
+        {/* An ENS name, so it keeps its lowercase */}
+        <a href="#top" className="normal-case hover:underline">
+          {site.handle}
         </a>
-        <ul className="flex flex-wrap md:justify-center">
+        <ul className="order-last col-span-2 flex flex-wrap md:order-none md:col-span-1 md:justify-center">
           {navItems.map((item, index) => (
             <li key={item.id}>
               {index > 0 && <span className="mx-1 opacity-40 md:mx-1.5">/</span>}
@@ -26,9 +29,15 @@ export function SiteNav({ dark }: { dark: boolean }) {
             </li>
           ))}
         </ul>
-        <span className="hidden justify-self-end md:block" suppressHydrationWarning>
-          ©{new Date().getFullYear()}
-        </span>
+        <a
+          href={site.resume}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-self-end hover:underline"
+        >
+          Resume
+          <ArrowUpRight className="ml-1 h-3 w-3" />
+        </a>
       </div>
     </nav>
   );
