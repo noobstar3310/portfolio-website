@@ -1,32 +1,34 @@
 import { navItems, site } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
+// Top bar: name left, slash-separated links centred, year right, set in the
+// same small uppercase labels as the rest of the site
 export function SiteNav({ dark }: { dark: boolean }) {
   return (
     <nav
       className={cn(
-        "fixed left-0 top-0 z-50 w-full px-6 py-6 transition-colors duration-500 md:px-12 md:py-8",
+        "fixed left-0 top-0 z-50 w-full px-6 py-5 text-[10px] font-medium uppercase tracking-wider transition-colors duration-500 md:px-12 md:text-xs md:tracking-widest",
         dark ? "bg-black text-white" : "bg-white text-black"
       )}
     >
-      <div className="grid grid-cols-2 items-start md:grid-cols-4">
-        <a href="#top" className="text-lg font-bold md:text-xl">
+      {/* Phones: name above the links; desktop: one row with the links centred */}
+      <div className="grid grid-cols-1 items-start gap-y-1.5 md:grid-cols-[1fr_auto_1fr] md:gap-x-6">
+        <a href="#top" className="hover:underline">
           {site.name}
-          <sup className="ml-1 text-xs">TM</sup>
         </a>
-        {/* Two links per column, filling columns 3 and 4 on desktop */}
-        <ul className="grid grid-flow-col grid-cols-2 grid-rows-2 gap-y-1 text-sm md:col-span-2 md:col-start-3 md:text-base">
-          {navItems.map((item) => (
+        <ul className="flex flex-wrap md:justify-center">
+          {navItems.map((item, index) => (
             <li key={item.id}>
+              {index > 0 && <span className="mx-1 opacity-40 md:mx-1.5">/</span>}
               <a href={`#${item.id}`} className="hover:underline">
-                <span className="mr-2 hidden text-xs tabular-nums opacity-50 md:inline">
-                  {item.number}
-                </span>
                 {item.label}
               </a>
             </li>
           ))}
         </ul>
+        <span className="hidden justify-self-end md:block" suppressHydrationWarning>
+          ©{new Date().getFullYear()}
+        </span>
       </div>
     </nav>
   );

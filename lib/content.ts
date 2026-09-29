@@ -1,8 +1,38 @@
+import type { StaticImageData } from "next/image";
 import portraitImage from "@/public/eggwae.jpeg";
+import deosxImage from "@/public/projects/deosx.jpg";
+import juncturaxImage from "@/public/projects/juncturax.jpg";
+import ominariImage from "@/public/projects/ominari.jpg";
+import ovantiImage from "@/public/projects/ovanti.jpg";
 
 export const site = {
   name: "Tan Aik Wei",
 };
+
+// The hero reads: NAME / ROLE / SPECIALIZING IN / (SPECIALTY)
+export const profile = {
+  role: "Full-stack developer",
+  specialty: "Smart contracts",
+};
+
+// Tech stack shown as a logo marquee under the hero headline, in this order.
+// `use` is the one-liner in the hover popup. Every name needs a logo in
+// lib/stack-icons.ts.
+export const stack = [
+  { name: "Solidity", use: "My main language for writing smart contracts." },
+  { name: "Foundry", use: "Compiling, testing and scripting my contracts." },
+  { name: "Ethereum", use: "The network my contracts are built for." },
+  { name: "ethers.js", use: "Reading and writing contracts from JavaScript apps." },
+  { name: "viem", use: "Type-safe contract calls in TypeScript front ends." },
+  { name: "wagmi", use: "Wallet connections and contract hooks in React." },
+  { name: "TypeScript", use: "My default language across front end and back end." },
+  { name: "JavaScript", use: "The foundation under all my web work." },
+  { name: "React", use: "Building the interfaces people use to reach contracts." },
+  { name: "Next.js", use: "Full-stack web apps, including this site." },
+  { name: "Tailwind CSS", use: "Styling interfaces quickly and consistently." },
+  { name: "Node.js", use: "APIs, scripts and back-end services." },
+  { name: "PostgreSQL", use: "Relational data for app back ends." },
+];
 
 export const sections = {
   about: { id: "about", number: "01", label: "About" },
@@ -12,19 +42,6 @@ export const sections = {
 };
 
 export const navItems = Object.values(sections);
-
-export const hero = {
-  headline: "Web3",
-  roles: ["Developer", "Educator", "Community Builder"],
-  details: [
-    {
-      label: "Currently",
-      value: "President of APU Blockchain and Cryptocurrency Club",
-    },
-    { label: "Based on", value: "Puchong, Selangor" },
-  ],
-  focus: ["Web3 Development", "Community Building", "Blockchain Education"],
-};
 
 export const about =
   "Tan Aik Wei is a Web3 enthusiast and aspiring DevRel from Puchong, Malaysia. He focused on growing blockchain communities and educating members about Web3 technologies. With 3 years of experience in the largest student blockchain club in South East Asia, he has grown the community from a couple hundred to almost 1000 members, organizing hackathons and educational activities.";
@@ -74,35 +91,40 @@ export const experience: Experience[] = [
 
 export interface Project {
   title: string;
-  event: string;
+  summary: string;
   link: string;
+  // Screenshot of the live landing page
+  image: StaticImageData;
 }
 
 export const projects: Project[] = [
   {
-    title: "Funds in Need",
-    event: "ETH Global Bangkok",
-    link: "https://github.com/Funds-In-Need",
+    title: "Ominari",
+    summary:
+      "A beginner-friendly prediction market across Polygon, BNB Chain and Base. Sign in with email and back your view on real-world events with a few dollars.",
+    link: "https://ominari.com/",
+    image: ominariImage,
   },
   {
-    title: "Rasa Review",
-    event: "ETH KL 2024",
-    link: "https://github.com/rasaReview",
+    title: "JuncturaX",
+    summary:
+      "Deep-tier supply chain finance. An anchor buyer's approved invoice becomes a divisible claim that suppliers down to Tier-4 can finance at anchor-linked rates.",
+    link: "https://www.juncturax.com/",
+    image: juncturaxImage,
   },
   {
-    title: "Asset Tracking App",
-    event: "Blockchain Development Assignment",
-    link: "https://github.com/noobstar3310/bcd-assignment",
+    title: "DEOS-X",
+    summary:
+      "A digital economy operating system for institutions, bringing on-chain FX, payments, custody and tokenisation onto one set of programmable rails.",
+    link: "https://www.deosx.com/",
+    image: deosxImage,
   },
   {
-    title: "Data.Auc",
-    event: "Encode Club Hackathon",
-    link: "https://encode-hackathon-ten.vercel.app/",
-  },
-  {
-    title: "Aliqudity",
-    event: "ETH Global Agentic Hack",
-    link: "https://ethglobal-agentic.vercel.app/",
+    title: "Ovanti",
+    summary:
+      "One app for every financial need. A global SuperApp bringing payments, credit, investing, insurance and loyalty together.",
+    link: "https://www.ovanti.com/",
+    image: ovantiImage,
   },
 ];
 
