@@ -11,6 +11,85 @@ html:has(#loader) {
   overflow: clip;
 }
 
+/* Tech stack marquee: the track holds two identical copies of the logos, so
+   sliding it left by half its width loops seamlessly */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 45s linear infinite;
+}
+
+/* Hold still while someone is reading a logo's popup (mouse or keyboard/tap) */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Hero headline glitch, triggered now and then from JS with .is-glitching.
+   Two copies of the line (from data-text) flash in as thin horizontal slices
+   shifted sideways: one black on a white strip that hides the text beneath,
+   so the line looks torn; one light grey ghost. Offsets are in em so they
+   scale with the headline. Monochrome to keep the black-and-white scheme. */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  /* Empty alt text keeps the copies out of the accessibility tree, so screen
+     readers don't hear each line three times */
+  content: attr(data-text) / "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.glitch::before {
+  background: #fff;
+}
+
+.glitch::after {
+  color: #c4c4c4;
+}
+
+.glitch.is-glitching::before {
+  animation: glitch-tear 360ms steps(1, end) both;
+}
+
+.glitch.is-glitching::after {
+  animation: glitch-ghost 360ms steps(1, end) both;
+}
+
+@keyframes glitch-tear {
+  0% { opacity: 1; clip-path: inset(12% 0 68% 0); transform: translateX(-0.05em); }
+  20% { clip-path: inset(58% 0 22% 0); transform: translateX(0.06em); }
+  40% { clip-path: inset(34% 0 48% 0); transform: translateX(-0.03em); }
+  60% { clip-path: inset(78% 0 6% 0); transform: translateX(0.04em); }
+  80% { clip-path: inset(2% 0 84% 0); transform: translateX(-0.06em); }
+  100% { opacity: 0; clip-path: inset(0 0 100% 0); transform: none; }
+}
+
+@keyframes glitch-ghost {
+  0% { opacity: 1; clip-path: inset(46% 0 30% 0); transform: translateX(0.08em); }
+  25% { clip-path: inset(8% 0 76% 0); transform: translateX(-0.07em); }
+  50% { clip-path: inset(66% 0 14% 0); transform: translateX(0.05em); }
+  75% { clip-path: inset(24% 0 58% 0); transform: translateX(-0.04em); }
+  100% { opacity: 0; clip-path: inset(0 0 100% 0); transform: none; }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

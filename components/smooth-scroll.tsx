@@ -10,8 +10,14 @@ export function SmoothScroll() {
     // Keep native scrolling for visitors who ask for less motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    // autoToggle pauses Lenis while the page overflow is locked (loader)
-    const lenis = new Lenis({ autoRaf: true, anchors: true, autoToggle: true });
+    // autoToggle pauses Lenis while the page overflow is locked (loader).
+    // lerp sets the glide: lower is smoother and floatier (Lenis default 0.1).
+    const lenis = new Lenis({
+      autoRaf: true,
+      anchors: true,
+      autoToggle: true,
+      lerp: 0.06,
+    });
     return () => lenis.destroy();
   }, []);
 

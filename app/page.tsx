@@ -5,7 +5,7 @@ import type React from "react";
 import { About } from "@/components/about";
 import { Contact } from "@/components/contact";
 import { ExperienceList } from "@/components/experience-list";
-import { Hero } from "@/components/hero";
+import { HeroStatement } from "@/components/hero-statement";
 import { ProjectList } from "@/components/project-list";
 import { SectionHeader } from "@/components/section-header";
 import { SiteNav } from "@/components/site-nav";
@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       <SiteNav dark={isDarkTheme || contactUnderNav} />
-      <Hero />
+      <HeroStatement />
 
       <section id={sections.about.id} className={themedSection}>
         <About />

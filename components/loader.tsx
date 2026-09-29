@@ -10,6 +10,35 @@ const COUNT_DURATION = 1800;
 // Pause at 100 plus the slide-up, before the loader is removed
 const EXIT_DURATION = 1000;
 
+// Fired on window when the loader starts lifting off the page
+export const LOADER_REVEAL_EVENT = "loader:reveal";
+
+// false while content should wait hidden behind the loader, true once the
+// loader starts lifting (plus `delay` ms). Server HTML, reduced motion and
+// pages without a loader are always true, so content is never stuck hidden.
+export function useLoaderReveal(delay = 0) {
+  const [revealed, setRevealed] = useState(true);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!document.getElementById("loader")) return;
+
+    let timer: ReturnType<typeof setTimeout>;
+    const reveal = () => {
+      timer = setTimeout(() => setRevealed(true), delay);
+    };
+    setRevealed(false);
+    window.addEventListener(LOADER_REVEAL_EVENT, reveal, { once: true });
+
+    return () => {
+      window.removeEventListener(LOADER_REVEAL_EVENT, reveal);
+      clearTimeout(timer);
+    };
+  }, [delay]);
+
+  return revealed;
+}
+
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
 function whenPageLoaded() {
@@ -65,6 +94,7 @@ export function Loader() {
 
   useEffect(() => {
     if (phase !== "leaving") return;
+    window.dispatchEvent(new Event(LOADER_REVEAL_EVENT));
     const timer = setTimeout(() => setPhase("done"), EXIT_DURATION);
     return () => clearTimeout(timer);
   }, [phase]);
