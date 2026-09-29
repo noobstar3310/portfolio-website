@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   font-family: "Inter", sans-serif;
+}
+
+/* Lock scrolling while the loading screen covers the page (Lenis pauses too) */
+html:has(#loader) {
+  overflow: clip;
 }
 
 @layer base {
