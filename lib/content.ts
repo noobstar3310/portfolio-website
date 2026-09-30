@@ -48,7 +48,7 @@ export const sections = {
 export const navItems = Object.values(sections);
 
 export const about =
-  "Tan Aik Wei is a Web3 enthusiast and aspiring DevRel from Puchong, Malaysia. He focused on growing blockchain communities and educating members about Web3 technologies. With 3 years of experience in the largest student blockchain club in South East Asia, he has grown the community from a couple hundred to almost 1000 members, organizing hackathons and educational activities.";
+  "Started in web3 on the community side, growing Southeast Asia's largest student blockchain club to nearly 1,000 members. Today building full stack products, end to end, from smart contracts to the interfaces on top. Next, he's focused on becoming a smart contract engineer, with security as the goal.";
 
 export const portrait = {
   image: portraitImage,
